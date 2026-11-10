@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pepelli | Every Style For Every You - AI Fashion & Ethnic E-Commerce</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#F8FAFC]">
+
+  <!-- Hidden Visual Search File Input -->
+  <input type="file" id="visual-search-file-input" accept="image/*" class="hidden" onchange="handleVisualSearchFile(event)" />
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION BAR (Exact Match to Reference)
+       ========================================================================== -->
+  <header class="pepelli-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Top Row: Logo, Search, Utility Links -->
+      <div class="flex items-center justify-between py-3 gap-4 lg:gap-8">
+        
+        <!-- Brand Logo with Lotus Mark -->
+        <a href="#" class="flex items-center gap-2 text-decoration-none flex-shrink-0" onclick="resetFilters()">
+          <img src="assets/ref/pepelli_logo.jpg" alt="Pepelli" class="h-10 sm:h-12 w-auto object-contain rounded" onerror="this.src='assets/logo.svg'" />
+        </a>
+
+        <!-- Central Search Bar (Pill Shape with AI Visual Search) -->
+        <div class="flex-1 max-w-xl">
+          <div class="search-pill">
+            <input 
+              type="text" 
+              id="main-search-input" 
+              class="search-input" 
+              placeholder="Search for Kurtis, Dresses, Tops, Co-ords..." 
+              autocomplete="off"
+            />
+            <button type="button" class="ai-search-cam-btn" onclick="triggerVisualSearchUpload()" title="Search with AI Image Match">
+              <i class="fa-solid fa-camera"></i>
+            </button>
+            <button type="button" class="search-btn" onclick="renderFullCatalog()">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Utility Navigation Icons -->
+        <div class="flex items-center gap-3 sm:gap-6 flex-shrink-0">
+          
+          <!-- Track Order -->
+          <div class="nav-util-item" onclick="openTrackOrderModal()" title="Track Your Order">
+            <div class="nav-util-icon-wrapper">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <span class="hidden sm:inline">Track Order</span>
+          </div>
+
+          <!-- Wishlist -->
+          <div class="nav-util-item" onclick="openWishlistDrawer()" title="Wishlist">
+            <div class="nav-util-icon-wrapper">
+              <i class="fa-regular fa-heart"></i>
+              <span id="wishlist-badge" class="badge-count" style="display:none">0</span>
+            </div>
+            <span class="hidden sm:inline">Wishlist</span>
+          </div>
+
+          <!-- Account -->
+          <div class="nav-util-item" onclick="showToast('👤 Welcome to Pepelli VIP Club!')" title="My Account">
+            <div class="nav-util-icon-wrapper">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <span class="hidden sm:inline">Account</span>
+          </div>
+
+          <!-- Cart -->
+          <div class="nav-util-item" onclick="openCartDrawer()" title="Shopping Cart">
+            <div class="nav-util-icon-wrapper">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span id="cart-badge" class="badge-count">3</span>
+            </div>
+            <span class="hidden sm:inline">Cart</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Sub-Navigation Links Bar -->
+      <nav class="subnav-bar">
+        <a href="#hero" class="subnav-link active" data-cat="all" onclick="setCategory('all')">Home</a>
+        <a href="#explore-catalog" class="subnav-link" data-cat="kurtis" onclick="setCategory('kurtis')">Kurtis</a>
+        <a href="#explore-catalog" class="subnav-link" data-cat="aline" onclick="setCategory('aline')">Dresses</a>
+        <a href="#explore-catalog" class="subnav-link" data-cat="tops" onclick="setCategory('tops')">Tops</a>
+        <a href="#explore-catalog" class="subnav-link" data-cat="coord" onclick="setCategory('coord')">Co-ord Sets</a>
+        <a href="#new-arrivals-sec" class="subnav-link" data-cat="all">New Arrivals</a>
+        <a href="#explore-catalog" class="subnav-link" data-cat="anarkali" onclick="setCategory('anarkali')">Best Sellers</a>
+        <a href="#explore-catalog" class="subnav-link text-amber-300 font-bold" data-cat="printed" onclick="setCategory('printed')">Offers</a>
+        <!-- AI Features Quick Nav -->
+        <a href="javascript:void(0)" class="subnav-link ai-pill" onclick="openAIStylistDrawer()">
+          <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI Stylist
+        </a>
+        <a href="javascript:void(0)" class="subnav-link bg-teal-500/20 text-[#00E5FF] border border-[#00E5FF]/40" onclick="openTryOnModal()">
+          <i class="fa-solid fa-mirror mr-1"></i> AI Try-On
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO BANNER SECTION (Pixel-Accurate Recreation)
+       ========================================================================== -->
+  <section id="hero" class="hero-container">
+    <div class="hero-botanical-bg"></div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 items-center relative z-10">
+      
+      <!-- Left Content -->
+      <div class="hero-content-left md:col-span-7">
+        <h1 class="hero-brand-title">Pepelli</h1>
+        <div class="hero-tagline">
+          Every Style For Every You <span class="heart-pink">♡</span>
+        </div>
+
+        <!-- 3 Feature Badges -->
+        <div class="hero-badges-row">
+          <div class="hero-badge-item">
+            <i class="fa-regular fa-gem hero-badge-icon"></i>
+            <div class="hero-badge-text">Trendy<br>Designs</div>
+          </div>
+          <div class="hero-badge-item">
+            <i class="fa-solid fa-leaf hero-badge-icon"></i>
+            <div class="hero-badge-text">Comfortable<br>Fabric</div>
+          </div>
+          <div class="hero-badge-item">
+            <i class="fa-solid fa-crown hero-badge-icon"></i>
+            <div class="hero-badge-text">Premium<br>Quality</div>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="#new-arrivals-sec" class="btn-shop-now">
+            SHOP NOW <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button onclick="openAIStylistDrawer()" class="px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-[#00E5FF] border border-[#00E5FF]/50 text-sm font-bold flex items-center gap-2 backdrop-blur-md transition">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Ask AI Stylist
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Visual (Model in Pink Kurti with Script Overlay) -->
+      <div class="hero-model-container md:col-span-5">
+        <div class="hero-script-overlay">
+          Fashion<br>that feels<br>like You ♡
+        </div>
+        <img 
+          src="assets/ref/hero_model.jpg" 
+          alt="Pepelli Fashion Model" 
+          class="hero-model-img"
+          onerror="this.src='assets/ref/hero_banner.jpg'"
+        />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       STORY / CATEGORY CIRCLES BAR (Exact Match to Reference)
+       ========================================================================== -->
+  <section class="categories-container">
+    <div class="max-w-7xl mx-auto">
+      <div class="cat-bubble-wrapper">
+        
+        <!-- 1. Kurtis -->
+        <div class="cat-bubble-item" onclick="setCategory('kurtis')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_kurtis.jpg" alt="Kurtis" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">Kurtis</span>
+        </div>
+
+        <!-- 2. Printed Kurtis -->
+        <div class="cat-bubble-item" onclick="setCategory('printed')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_printed.jpg" alt="Printed Kurtis" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">Printed Kurtis</span>
+        </div>
+
+        <!-- 3. A-Line Dresses -->
+        <div class="cat-bubble-item" onclick="setCategory('aline')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_aline.jpg" alt="A-Line Dresses" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">A-Line Dresses</span>
+        </div>
+
+        <!-- 4. Straight Kurtis -->
+        <div class="cat-bubble-item" onclick="setCategory('kurtis')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_straight.jpg" alt="Straight Kurtis" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">Straight Kurtis</span>
+        </div>
+
+        <!-- 5. Anarkali -->
+        <div class="cat-bubble-item" onclick="setCategory('anarkali')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_anarkali.jpg" alt="Anarkali" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">Anarkali</span>
+        </div>
+
+        <!-- 6. Co-ord Sets -->
+        <div class="cat-bubble-item" onclick="setCategory('coord')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_coord.jpg" alt="Co-ord Sets" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">Co-ord Sets</span>
+        </div>
+
+        <!-- 7. Tops -->
+        <div class="cat-bubble-item" onclick="setCategory('tops')">
+          <div class="cat-circle-avatar">
+            <img src="assets/ref/cat_tops.jpg" alt="Tops" class="cat-avatar-img" />
+          </div>
+          <span class="cat-bubble-title">Tops</span>
+        </div>
+
+        <!-- 8. Special Offers -->
+        <div class="cat-bubble-item special-offers" onclick="setCategory('all')">
+          <div class="cat-circle-avatar">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <span class="cat-bubble-title text-orange-600 font-bold">Special Offers</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VALUE PROPOSITIONS STRIP (Capsule Bar - Exact Reference)
+       ========================================================================== -->
+  <section class="trust-strip-container">
+    <div class="trust-capsule">
+      
+      <div class="trust-item">
+        <i class="fa-solid fa-truck-ramp-box trust-icon"></i>
+        <div class="trust-label">All India<br><span class="text-xs font-normal text-slate-300">Delivery</span></div>
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-box-open trust-icon"></i>
+        <div class="trust-label">Easy<br><span class="text-xs font-normal text-slate-300">Returns</span></div>
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-shield-halved trust-icon"></i>
+        <div class="trust-label">Secure<br><span class="text-xs font-normal text-slate-300">Payments</span></div>
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-headset trust-icon"></i>
+        <div class="trust-label">24/7<br><span class="text-xs font-normal text-slate-300">Support</span></div>
+      </div>
+
+      <!-- WhatsApp Instant Order -->
+      <div class="trust-item whatsapp-order" onclick="orderViaWhatsApp()">
+        <i class="fa-brands fa-whatsapp text-2xl text-green-400"></i>
+        <div class="trust-label font-bold text-white">Order on<br><span class="text-green-300">WhatsApp</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       NEW ARRIVALS SECTION (Carousel with DS-001 to DS-005)
+       ========================================================================== -->
+  <section id="new-arrivals-sec" class="py-6">
+    <div class="max-w-7xl mx-auto px-4">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row items-center justify-between pb-3 mb-2 border-b border-slate-200">
+        <div></div>
+        <div class="text-center">
+          <h2 class="section-heading-leaves">
+            <span class="leaf-ornament">🌿</span>
+            <span>New <span class="brand-highlight">Arrivals</span></span>
+            <span class="leaf-ornament">🌿</span>
+          </h2>
+          <div class="section-subheading-dash">— Latest Collection Just For You —</div>
+        </div>
+        <div>
+          <a href="#explore-catalog" class="btn-view-all-pill">
+            View All <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Carousel Container -->
+      <div class="carousel-wrapper">
+        <button id="carousel-prev" class="carousel-nav-btn prev-btn" aria-label="Previous">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div id="new-arrivals-track" class="products-carousel-track">
+          <!-- Populated by app.js: DS-001, DS-002, DS-003, DS-004, DS-005 -->
+        </div>
+
+        <button id="carousel-next" class="carousel-nav-btn next-btn" aria-label="Next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DUAL PROMO BANNERS (Exact Match to Reference)
+       ========================================================================== -->
+  <section class="promo-banners-wrap">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Left Banner: Kurtis Collection (Peach/Pink) -->
+      <div class="promo-banner-card promo-kurtis-bg p-6 flex items-center justify-between">
+        <div class="w-1/2">
+          <img src="assets/ref/promo_kurtis.jpg" alt="Kurtis Collection" class="rounded-xl shadow-md max-h-40 object-cover" />
+        </div>
+        <div class="w-1/2 pl-4">
+          <h3 class="promo-kurtis-title">Kurtis<br>Collection</h3>
+          <p class="promo-kurtis-sub">Trendy | Comfortable | Stylish</p>
+          <a href="#explore-catalog" class="btn-promo-crimson" onclick="setCategory('kurtis')">
+            SHOP NOW <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Banner: New Season New Styles (Deep Teal) -->
+      <div class="promo-banner-card promo-styles-bg p-6 flex items-center justify-between">
+        <div class="w-7/12 pr-4">
+          <div class="promo-styles-title">
+            <span class="text-xs uppercase tracking-widest text-[#00E5FF] font-semibold block mb-1">New Season</span>
+            <span class="sub-script">New Styles ♡</span>
+          </div>
+          <p class="promo-styles-sub">Upgrade Your Wardrobe With Fresh Trends</p>
+          <a href="#explore-catalog" class="btn-promo-white" onclick="setCategory('coord')">
+            EXPLORE NOW <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+        <div class="w-5/12">
+          <img src="assets/ref/promo_new_styles.jpg" alt="New Styles" class="rounded-xl shadow-md max-h-40 object-cover" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       EXPLORE FULL CATALOG & REAL PHOTOSHOOT SECTION
+       ========================================================================== -->
+  <section id="explore-catalog" class="py-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-8">
+        <span class="text-xs uppercase tracking-widest font-bold text-[#008f97] bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+          Handcrafted Elegance
+        </span>
+        <h2 class="text-3xl font-bold text-slate-900 mt-2">
+          Curated Ethnic Wardrobe
+        </h2>
+        <p class="text-slate-500 text-sm max-w-xl mx-auto mt-1">
+          Explore pure Jaipuri cotton kurtis, regal 2-piece ensembles, and celebratory 3-piece suit sets crafted with love.
+        </p>
+
+        <!-- Filter Tabs -->
+        <div class="flex items-center justify-center gap-2 mt-6 flex-wrap">
+          <button class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#00c2cb] text-slate-900 hover:bg-[#00e5ff] transition" onclick="setCategory('all')">
+            All Styles
+          </button>
+          <button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-[#00c2cb] transition" onclick="setCategory('coord')">
+            2-Piece Sets
+          </button>
+          <button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-[#00c2cb] transition" onclick="setCategory('anarkali')">
+            3-Piece Suit Sets
+          </button>
+          <button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-[#00c2cb] transition" onclick="setCategory('kurtis')">
+            Long Kurtis
+          </button>
+          <button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-[#00c2cb] transition" onclick="setCategory('printed')">
+            Pure Cotton Jaipuri
+          </button>
+          <button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-[#00c2cb] transition" onclick="setCategory('tops')">
+            Tops & Short Kurtis
+          </button>
+        </div>
+      </div>
+
+      <!-- Catalog Grid Container -->
+      <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+        <!-- Rendered by app.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       WHY CHOOSE PEPELLI? (Exact Match to Reference - 4 Badges)
+       ========================================================================== -->
+  <section class="why-choose-section">
+    <div class="max-w-5xl mx-auto px-4">
+      
+      <div class="text-center mb-6">
+        <h2 class="section-heading-leaves">
+          <span class="leaf-ornament">🌿</span>
+          <span>Why Choose <span class="brand-highlight">Pepelli?</span></span>
+          <span class="leaf-ornament">🌿</span>
+        </h2>
+      </div>
+
+      <div class="features-grid-4">
+        
+        <!-- 1. Trendy Designs -->
+        <div class="feature-circle-card">
+          <div class="feature-cyan-circle">
+            <i class="fa-regular fa-gem"></i>
+          </div>
+          <div class="feature-title-text">
+            Trendy<br>Designs
+          </div>
+        </div>
+
+        <!-- 2. Skin Friendly Fabric -->
+        <div class="feature-circle-card">
+          <div class="feature-cyan-circle">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <div class="feature-title-text">
+            Skin Friendly<br>Fabric
+          </div>
+        </div>
+
+        <!-- 3. Best Quality -->
+        <div class="feature-circle-card">
+          <div class="feature-cyan-circle">
+            <i class="fa-solid fa-crown"></i>
+          </div>
+          <div class="feature-title-text">
+            Best<br>Quality
+          </div>
+        </div>
+
+        <!-- 4. Latest Fashion -->
+        <div class="feature-circle-card">
+          <div class="feature-cyan-circle">
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <div class="feature-title-text">
+            Latest<br>Fashion
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       NEWSLETTER & FOOTER (Exact Match to Reference)
+       ========================================================================== -->
+  <footer class="pepelli-footer">
+    
+    <!-- Newsletter Strip -->
+    <div class="newsletter-bar">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <!-- Left Brand Logo -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <img src="assets/ref/pepelli_logo.jpg" alt="Pepelli" class="h-10 sm:h-12 w-auto object-contain rounded" onerror="this.src='assets/logo.svg'" />
+        </div>
+
+        <!-- Center Newsletter Copy -->
+        <div class="text-center md:text-left flex-1 md:px-8">
+          <h4 class="text-lg font-bold text-white mb-0.5">Subscribe to our Newsletter</h4>
+          <p class="text-xs text-slate-400">Get latest updates, new arrivals and exclusive offers.</p>
+        </div>
+
+        <!-- Right Input Box -->
+        <form id="newsletter-form" class="newsletter-input-box">
+          <input 
+            type="email" 
+            id="newsletter-email" 
+            placeholder="Enter your email" 
+            class="newsletter-input" 
+            required 
+          />
+          <button type="submit" class="btn-subscribe-cyan">Subscribe</button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Main Footer Links Columns -->
+    <div class="footer-main-links max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      
+      <div>
+        <h5 class="footer-col-title">About Pepelli</h5>
+        <p class="text-xs text-slate-400 leading-relaxed mb-3">
+          Pepelli brings you the finest handcrafted Indian ethnic wear, blending age-old Rajasthani block printing traditions with modern everyday comfort and silhouette perfection.
+        </p>
+        <div class="flex items-center gap-3 text-slate-300 text-base">
+          <a href="#" class="hover:text-[#00E5FF]"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-[#00E5FF]"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="hover:text-[#00E5FF]"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="hover:text-[#00E5FF]"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h5 class="footer-col-title">Categories</h5>
+        <ul class="footer-link-list">
+          <li><a href="#explore-catalog" onclick="setCategory('kurtis')">Straight Kurtis</a></li>
+          <li><a href="#explore-catalog" onclick="setCategory('printed')">Printed Kurtis</a></li>
+          <li><a href="#explore-catalog" onclick="setCategory('aline')">A-Line Dresses</a></li>
+          <li><a href="#explore-catalog" onclick="setCategory('coord')">2-Piece Co-ord Sets</a></li>
+          <li><a href="#explore-catalog" onclick="setCategory('anarkali')">3-Piece Dupatta Sets</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="footer-col-title">Customer Care</h5>
+        <ul class="footer-link-list">
+          <li><a href="javascript:void(0)" onclick="openTrackOrderModal()">Track Order</a></li>
+          <li><a href="javascript:void(0)" onclick="showToast('Free Exchange & Returns within 7 days')">Return & Exchange Policy</a></li>
+          <li><a href="javascript:void(0)" onclick="openFitAdvisorModal()">AI Size Guide</a></li>
+          <li><a href="javascript:void(0)" onclick="orderViaWhatsApp()">WhatsApp Support</a></li>
+          <li><a href="javascript:void(0)" onclick="showToast('100% Genuine Certified Fabrics')">Fabric Care Guide</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="footer-col-title">Contact & Hub</h5>
+        <p class="text-xs text-slate-400 leading-relaxed mb-2">
+          <b>Design Studio:</b> Sanganer Heritage Block Printing Hub, Jaipur, Rajasthan - 302029
+        </p>
+        <p class="text-xs text-slate-400 mb-1">
+          <i class="fa-solid fa-phone text-[#00c2cb] mr-1.5"></i> +91 98765 43210
+        </p>
+        <p class="text-xs text-slate-400 mb-1">
+          <i class="fa-solid fa-envelope text-[#00c2cb] mr-1.5"></i> care@pepelli.com
+        </p>
+        <div class="mt-3 pt-3 border-t border-slate-800 text-[11px] text-teal-400 font-semibold">
+          ⚡ 100% Cotton Pre-Shrunk Tested
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-bar max-w-7xl mx-auto">
+      <div>
+        © 2026 <b>Pepelli</b>. Every Style For Every You. All rights reserved.
+      </div>
+      <div class="flex items-center gap-3 text-sm text-slate-400">
+        <span>Payment Partners:</span>
+        <i class="fa-brands fa-google-pay text-xl text-white"></i>
+        <i class="fa-brands fa-cc-visa text-xl text-white"></i>
+        <i class="fa-brands fa-cc-mastercard text-xl text-white"></i>
+        <span class="text-xs text-emerald-400 font-bold">Cash on Delivery Available</span>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ==========================================================================
+       AI FLOATING BUTTON (Instant AI Stylist)
+       ========================================================================== -->
+  <div class="ai-floating-badge" onclick="openAIStylistDrawer()">
+    <div class="ai-floating-pulse"></div>
+    <i class="fa-solid fa-wand-magic-sparkles text-lg animate-spin" style="animation-duration: 8s"></i>
+    <span>Ask AI Stylist</span>
+  </div>
+
+  <!-- Shared Modal Backdrop -->
+  <div id="modal-backdrop" class="modal-backdrop"></div>
+
+  <!-- ==========================================================================
+       SLIDE-OVER CART DRAWER
+       ========================================================================== -->
+  <div id="cart-drawer" class="drawer-container">
+    
+    <!-- Drawer Header -->
+    <div class="p-4 bg-[#051d2d] text-white flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-bag-shopping text-[#00E5FF]"></i>
+        <h3 class="font-bold text-base">Your Shopping Bag</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="text-slate-300 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="bg-teal-50 px-4 py-2.5 border-b border-teal-100">
+      <div id="free-shipping-text" class="text-xs text-teal-900 mb-1 font-medium">
+        Add <b>₹201</b> more to unlock <b>FREE Delivery!</b>
+      </div>
+      <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+        <div id="free-shipping-progress" class="bg-[#00c2cb] h-full transition-all duration-300" style="width: 80%"></div>
+      </div>
+    </div>
+
+    <!-- Items List -->
+    <div class="flex-1 overflow-y-auto p-4" id="cart-items-container">
+      <div id="cart-items-list" class="space-y-1"></div>
+      
+      <!-- Empty State -->
+      <div id="cart-empty-state" class="text-center py-12" style="display:none">
+        <i class="fa-solid fa-cart-shopping text-5xl text-slate-200 mb-3 block"></i>
+        <p class="font-bold text-slate-700">Your shopping bag is empty</p>
+        <p class="text-xs text-slate-500 mt-1 mb-4">Discover our handpicked designer kurtis starting at ₹799.</p>
+        <button onclick="closeCartDrawer()" class="px-5 py-2 bg-[#00c2cb] text-slate-900 text-xs font-bold rounded-full">
+          Explore Collection
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Summary -->
+    <div id="cart-footer-summary" class="p-4 bg-slate-50 border-t border-slate-200">
+      
+      <!-- Coupon Code Box -->
+      <div class="flex gap-2 mb-3">
+        <input 
+          type="text" 
+          id="coupon-code-input" 
+          placeholder="Promo code (e.g. PEPELLI10)" 
+          class="flex-1 text-xs px-3 py-2 border border-slate-300 rounded-lg outline-none uppercase font-semibold"
+        />
+        <button onclick="applyCoupon()" class="px-3 py-2 bg-[#051d2d] text-white text-xs font-bold rounded-lg hover:bg-[#00c2cb] hover:text-slate-900 transition">
+          Apply
+        </button>
+      </div>
+
+      <!-- Financials Breakdown -->
+      <div class="space-y-1.5 text-xs text-slate-600 mb-3">
+        <div class="flex justify-between">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal-val" class="font-bold text-slate-800">₹0</span>
+        </div>
+        <div id="cart-coupon-row" class="flex justify-between text-green-600 font-semibold" style="display:none">
+          <span>Coupon Discount:</span>
+          <span id="cart-coupon-val">-₹0</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Delivery Fee:</span>
+          <span id="cart-shipping-val" class="font-bold text-emerald-600">FREE</span>
+        </div>
+        <div class="flex justify-between text-sm font-bold text-slate-900 pt-2 border-t border-slate-200">
+          <span>Grand Total:</span>
+          <span id="cart-grand-total" class="text-[#008f97] text-base">₹0</span>
+        </div>
+      </div>
+
+      <!-- Checkout Buttons -->
+      <div class="space-y-2">
+        <button onclick="openCheckoutModal()" class="w-full py-3 bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 font-bold rounded-xl text-sm shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock text-xs"></i> PROCEED TO CHECKOUT
+        </button>
+        <button onclick="orderViaWhatsApp()" class="w-full py-2 bg-[#25D366] hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Order via WhatsApp Instant
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       SLIDE-OVER WISHLIST DRAWER
+       ========================================================================== -->
+  <div id="wishlist-drawer" class="drawer-container">
+    <div class="p-4 bg-[#051d2d] text-white flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-heart text-rose-500"></i>
+        <h3 class="font-bold text-base">Saved Favourites</h3>
+      </div>
+      <button onclick="closeWishlistDrawer()" class="text-slate-300 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-4">
+      <div id="wishlist-items-list" class="space-y-1"></div>
+      
+      <div id="wishlist-empty-state" class="text-center py-16" style="display:none">
+        <i class="fa-regular fa-heart text-5xl text-slate-200 mb-3 block"></i>
+        <p class="font-bold text-slate-700">Your wishlist is empty</p>
+        <p class="text-xs text-slate-500 mt-1">Tap the heart icon on any outfit to save it for later.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       AI STYLIST CHAT DRAWER
+       ========================================================================== -->
+  <div id="ai-stylist-drawer" class="drawer-container">
+    
+    <!-- AI Header -->
+    <div class="p-4 bg-gradient-to-r from-[#031726] to-[#0a3854] text-white flex items-center justify-between border-b border-cyan-500/30">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-400 to-fuchsia-500 flex items-center justify-center text-white text-xs font-bold shadow-md">
+          ✨
+        </div>
+        <div>
+          <h3 class="font-bold text-sm leading-tight">Pepelli AI Personal Stylist</h3>
+          <span class="text-[11px] text-[#00E5FF] font-medium flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-ping"></span> Online • Indian Ethnic Advisor
+          </span>
+        </div>
+      </div>
+      <button onclick="closeAIStylistDrawer()" class="text-slate-300 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Quick Prompt Suggestions -->
+    <div class="p-2.5 bg-slate-100 border-b border-slate-200 overflow-x-auto whitespace-nowrap flex gap-1.5 scrollbar-none">
+      <button onclick="sendAIStylistMessage('Suggest an outfit for a friend wedding sangeet')" class="text-[11px] bg-white border border-slate-200 hover:border-[#00c2cb] px-2.5 py-1 rounded-full text-slate-700 flex-shrink-0 transition">
+        🌸 Sangeet Party Look
+      </button>
+      <button onclick="sendAIStylistMessage('Show comfortable cotton kurtis for office wear under 800')" class="text-[11px] bg-white border border-slate-200 hover:border-[#00c2cb] px-2.5 py-1 rounded-full text-slate-700 flex-shrink-0 transition">
+        💼 Daily Office Wear
+      </button>
+      <button onclick="sendAIStylistMessage('How do I style DS-001 Royal Pink Kurti?')" class="text-[11px] bg-white border border-slate-200 hover:border-[#00c2cb] px-2.5 py-1 rounded-full text-slate-700 flex-shrink-0 transition">
+        👗 Style DS-001 Pink
+      </button>
+      <button onclick="sendAIStylistMessage('Best breathable fabrics for summer')" class="text-[11px] bg-white border border-slate-200 hover:border-[#00c2cb] px-2.5 py-1 rounded-full text-slate-700 flex-shrink-0 transition">
+        ☀️ Pure Summer Cottons
+      </button>
+    </div>
+
+    <!-- Chat Messages Scroll Container -->
+    <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-4 space-y-2">
+      
+      <!-- Welcome Bubble -->
+      <div class="flex gap-2 items-start mb-3">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0 mt-0.5 shadow">
+          ✨
+        </div>
+        <div class="bg-slate-50 border border-slate-200 text-slate-800 text-xs px-3.5 py-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm">
+          <p class="leading-relaxed">
+            Namaste! 🌸 I am your <b>Pepelli AI Stylist</b>. Tell me about the occasion, your favorite colors, or budget, and I'll handpick the perfect ethnic silhouette for you!
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Chat Input Box -->
+    <div class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+      <input 
+        type="text" 
+        id="ai-stylist-input" 
+        placeholder="Ask anything (e.g. 'Haldi ceremony dress', 'DS-002 black')..." 
+        class="flex-1 text-xs px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-full outline-none focus:border-[#00c2cb] focus:bg-white"
+        onkeydown="if(event.key==='Enter') sendAIStylistMessage()"
+      />
+      <button onclick="sendAIStylistMessage()" class="w-9 h-9 rounded-full bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 flex items-center justify-center flex-shrink-0 transition shadow-sm">
+        <i class="fa-solid fa-paper-plane text-xs"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       AI VIRTUAL TRY-ON STUDIO MODAL (AI MIRROR)
+       ========================================================================== -->
+  <div id="ai-tryon-modal" class="bg-white rounded-2xl max-w-2xl w-full mx-auto overflow-hidden shadow-2xl relative z-50 p-6 hidden">
+    
+    <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">✨</span>
+        <h3 class="font-bold text-lg text-slate-900">Pepelli AI Virtual Mirror & Try-On</h3>
+      </div>
+      <button onclick="closeTryOnModal()" class="text-slate-400 hover:text-slate-800 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-4">
+      
+      <!-- Canvas Display -->
+      <div class="md:col-span-7 flex flex-col items-center">
+        <div class="relative rounded-xl overflow-hidden border-2 border-teal-200 bg-slate-100 shadow-inner">
+          <canvas id="tryon-canvas" width="300" height="380" class="block"></canvas>
+        </div>
+        <div class="flex gap-2 mt-3 text-xs">
+          <button class="tryon-model-chip active px-3 py-1 rounded-full border border-[#00c2cb] bg-teal-50 font-semibold" data-model="model1">
+            Fair Skin
+          </button>
+          <button class="tryon-model-chip px-3 py-1 rounded-full border border-slate-200 font-semibold text-slate-600" data-model="wheatish">
+            Wheatish
+          </button>
+          <button class="tryon-model-chip px-3 py-1 rounded-full border border-slate-200 font-semibold text-slate-600" data-model="dusky">
+            Dusky Warm
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls & AI Fit Analysis -->
+      <div class="md:col-span-5 flex flex-col justify-between">
+        
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Select Garment:</label>
+          <select id="tryon-product-select" class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none bg-slate-50 mb-3"></select>
+
+          <!-- Garment Info -->
+          <div class="bg-teal-50/70 border border-teal-100 rounded-xl p-3 mb-3">
+            <div id="tryon-product-name" class="font-bold text-xs text-slate-900">DS-001 Royal Pink Kurti</div>
+            <div id="tryon-product-price" class="text-sm font-bold text-[#008f97]">₹799</div>
+            <div id="tryon-match-score" class="text-xs font-bold text-emerald-600 mt-1">98% Flattering Fit Score</div>
+            <p id="tryon-style-tip" class="text-[11px] text-slate-600 mt-1 leading-relaxed">
+              Vibrant Rani Pink beautifully balances natural undertones with radiant glow.
+            </p>
+          </div>
+
+          <!-- Adjusters -->
+          <div class="space-y-2 text-xs">
+            <div>
+              <div class="flex justify-between text-slate-600 mb-1">
+                <span>Scale / Silhouette Fit:</span>
+              </div>
+              <input type="range" id="tryon-scale-slider" min="0.8" max="1.2" step="0.02" value="1" class="w-full accent-[#00c2cb]" />
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-600 mb-1">
+                <span>Fabric Drape Blend:</span>
+              </div>
+              <input type="range" id="tryon-opacity-slider" min="0.7" max="1.0" step="0.05" value="0.95" class="w-full accent-[#00c2cb]" />
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-slate-200 space-y-2">
+          <button onclick="if(tryOnState.selectedProduct) quickAddToCart(tryOnState.selectedProduct.id); closeTryOnModal(); openCartDrawer()" class="w-full py-2.5 bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 font-bold text-xs rounded-xl shadow transition">
+            Add This Look to Cart
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       AI SMART SIZE & FIT ADVISOR MODAL
+       ========================================================================== -->
+  <div id="ai-fit-modal" class="bg-white rounded-2xl max-w-md w-full mx-auto overflow-hidden shadow-2xl relative z-50 p-6 hidden">
+    
+    <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-ruler-combined text-[#00c2cb]"></i>
+        <h3 class="font-bold text-base text-slate-900">AI Smart Fit Advisor</h3>
+      </div>
+      <button onclick="closeFitAdvisorModal()" class="text-slate-400 hover:text-slate-800">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mt-3">
+      <div id="fit-modal-product-title" class="text-xs font-semibold text-slate-500 mb-3">Garment: DS-001</div>
+
+      <!-- Questionnaire Form -->
+      <form id="fit-advisor-form" onsubmit="calculateAIFit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Your Height (in cm):</label>
+          <input type="number" id="fit-height" value="162" min="130" max="200" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg outline-none" required />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Your Weight (in kg):</label>
+          <input type="number" id="fit-weight" value="58" min="35" max="130" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg outline-none" required />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Bust Measurement (inches):</label>
+          <input type="number" id="fit-bust" value="36" min="28" max="54" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg outline-none" required />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Preferred Silhouette Fit:</label>
+          <select id="fit-preference" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg outline-none bg-white">
+            <option value="regular">Regular Flattering Ease (Recommended)</option>
+            <option value="slim">Fitted Tailored Cut</option>
+            <option value="relaxed">Relaxed Breezy Flow</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 font-bold text-xs rounded-xl shadow transition mt-2">
+          Calculate My Perfect Size with AI
+        </button>
+      </form>
+
+      <!-- Result Card -->
+      <div id="fit-advisor-result" class="text-center py-4 space-y-3" style="display:none">
+        <div class="w-16 h-16 rounded-full bg-teal-50 border-2 border-[#00c2cb] flex items-center justify-center mx-auto text-2xl font-black text-slate-900" id="fit-result-size">
+          M
+        </div>
+        <div class="text-xs font-bold text-emerald-600" id="fit-result-confidence">96% Match Confidence</div>
+        <p class="text-xs text-slate-600 leading-relaxed px-2" id="fit-result-details">
+          Size M will provide a flattering drape with 2.5 inches of comfortable ease.
+        </p>
+        <button onclick="applyPredictedSize()" class="w-full py-2.5 bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 font-bold text-xs rounded-xl shadow transition">
+          Apply Size & Select
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       PRODUCT QUICK VIEW & DETAILS MODAL
+       ========================================================================== -->
+  <div id="product-detail-modal" class="bg-white rounded-2xl max-w-3xl w-full mx-auto overflow-hidden shadow-2xl relative z-50 p-6 hidden">
+    
+    <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl z-10">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      
+      <!-- Image Preview -->
+      <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-[3/4]">
+        <img id="modal-product-img" src="" alt="Product" class="w-full h-full object-cover" />
+        <span id="modal-product-tag" class="product-tag-pill">Best Seller</span>
+      </div>
+
+      <!-- Product Details & Sizing -->
+      <div>
+        <div id="modal-product-code" class="text-xs font-bold uppercase tracking-wider text-[#008f97] mb-1">DS-001</div>
+        <h3 id="modal-product-name" class="font-bold text-xl text-slate-900 leading-snug mb-2">Royal Rani Pink Kurti</h3>
+        
+        <div class="flex items-center gap-3 mb-3">
+          <span id="modal-product-price" class="text-2xl font-black text-slate-900">₹799</span>
+          <span id="modal-product-mrp" class="text-sm line-through text-slate-400">₹1,999</span>
+          <span id="modal-product-discount" class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">60% OFF</span>
+        </div>
+
+        <div id="modal-product-stock" class="text-xs font-semibold text-rose-600 mb-3">
+          🔥 Only 4 left in stock!
+        </div>
+
+        <p id="modal-product-desc" class="text-xs text-slate-600 leading-relaxed mb-4">
+          Handcrafted pure cotton kurti with exquisite zari work.
+        </p>
+
+        <!-- Size Selection -->
+        <div class="mb-4">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="text-xs font-bold text-slate-700">Select Size:</span>
+            <button onclick="openFitAdvisorModal()" class="text-xs text-[#008f97] hover:text-[#00c2cb] font-semibold flex items-center gap-1">
+              <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i> AI Fit Advisor
+            </button>
+          </div>
+          <div class="flex gap-2">
+            <button class="size-select-btn px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-bold" data-size="S" onclick="selectProductSize('S', this)">S (36)</button>
+            <button class="size-select-btn px-3 py-1.5 border border-[#00c2cb] bg-[#00c2cb] text-slate-900 rounded-lg text-xs font-bold" data-size="M" onclick="selectProductSize('M', this)">M (38)</button>
+            <button class="size-select-btn px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-bold" data-size="L" onclick="selectProductSize('L', this)">L (40)</button>
+            <button class="size-select-btn px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-bold" data-size="XL" onclick="selectProductSize('XL', this)">XL (42)</button>
+            <button class="size-select-btn px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-bold" data-size="XXL" onclick="selectProductSize('XXL', this)">XXL (44)</button>
+          </div>
+        </div>
+
+        <!-- Garment Specifications -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11px] text-slate-600 space-y-1 mb-4">
+          <div><b>Fabric:</b> <span id="modal-product-fabric">Pure Cotton</span></div>
+          <div><b>Sleeves:</b> <span id="modal-product-sleeve">3/4 Sleeves</span></div>
+          <div><b>Neck Style:</b> <span id="modal-product-neck">Mandarin Collar</span></div>
+          <div><b>Length:</b> <span id="modal-product-length">Calf Length</span></div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="space-y-2">
+          <div class="flex gap-2">
+            <button onclick="addModalProductToCart()" class="flex-1 py-3 bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 font-bold rounded-xl text-xs shadow transition">
+              <i class="fa-solid fa-cart-shopping mr-1"></i> ADD TO CART
+            </button>
+            <button onclick="buyModalProductNow()" class="flex-1 py-3 bg-[#051d2d] hover:bg-slate-800 text-white font-bold rounded-xl text-xs shadow transition">
+              BUY NOW
+            </button>
+          </div>
+          <button onclick="orderViaWhatsApp(state.activeProductModal?.id)" class="w-full py-2 bg-[#25D366] hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Order this Kurti on WhatsApp
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       TRACK ORDER MODAL
+       ========================================================================== -->
+  <div id="track-order-modal" class="bg-white rounded-2xl max-w-md w-full mx-auto overflow-hidden shadow-2xl relative z-50 p-6 hidden">
+    
+    <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-truck-fast text-[#00c2cb]"></i>
+        <h3 class="font-bold text-base text-slate-900">Track Your Order</h3>
+      </div>
+      <button onclick="closeTrackOrderModal()" class="text-slate-400 hover:text-slate-800">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mt-4">
+      <div class="flex gap-2 mb-4">
+        <input 
+          type="text" 
+          id="track-order-input" 
+          placeholder="Enter Order ID (e.g. PEP-98241)" 
+          value="PEP-98241"
+          class="flex-1 text-xs px-3 py-2 border border-slate-300 rounded-lg outline-none uppercase font-semibold"
+        />
+        <button onclick="searchOrderTracking()" class="px-4 py-2 bg-[#00c2cb] text-slate-900 text-xs font-bold rounded-lg hover:bg-[#00e5ff]">
+          Track
+        </button>
+      </div>
+
+      <!-- Tracking Result Container -->
+      <div id="track-order-result"></div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       CHECKOUT MODAL
+       ========================================================================== -->
+  <div id="checkout-modal" class="bg-white rounded-2xl max-w-lg w-full mx-auto overflow-hidden shadow-2xl relative z-50 p-6 hidden">
+    
+    <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-shield-halved text-[#00c2cb]"></i>
+        <h3 class="font-bold text-base text-slate-900">Secure Express Checkout</h3>
+      </div>
+      <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-800">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <form onsubmit="processCheckout(event)" class="mt-4 space-y-3">
+      
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 mb-1">Full Name</label>
+          <input type="text" value="Priya Sharma" required class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 mb-1">Mobile (for WhatsApp updates)</label>
+          <input type="tel" value="9876543210" required class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-[11px] font-semibold text-slate-700 mb-1">Delivery Address</label>
+        <input type="text" value="Flat 402, Lotus Residency, MG Road" required class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none" />
+      </div>
+
+      <div class="grid grid-cols-3 gap-2">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 mb-1">PIN Code</label>
+          <input type="text" value="302001" required class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 mb-1">City</label>
+          <input type="text" value="Jaipur" required class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 mb-1">State</label>
+          <input type="text" value="Rajasthan" required class="w-full text-xs p-2 border border-slate-300 rounded-lg outline-none" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Select Payment Method</label>
+        <div class="space-y-2">
+          <label class="flex items-center gap-2 p-2 border border-teal-200 bg-teal-50 rounded-lg cursor-pointer text-xs">
+            <input type="radio" name="paymentMethod" value="COD" checked class="accent-[#00c2cb]" />
+            <span class="font-bold text-slate-800">Cash on Delivery (COD)</span>
+            <span class="ml-auto text-[10px] bg-teal-600 text-white px-2 py-0.5 rounded">Free</span>
+          </label>
+          <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg cursor-pointer text-xs hover:border-[#00c2cb]">
+            <input type="radio" name="paymentMethod" value="UPI" class="accent-[#00c2cb]" />
+            <span class="font-semibold text-slate-800">Instant UPI (GPay / PhonePe / Paytm)</span>
+            <span class="ml-auto text-emerald-600 font-bold text-[11px]">Extra 5% OFF</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-slate-500">Payable Amount:</span>
+          <div id="checkout-total-display" class="text-xl font-black text-slate-900">₹799</div>
+        </div>
+        <button type="submit" class="px-6 py-2.5 bg-[#00c2cb] hover:bg-[#00e5ff] text-slate-900 font-bold text-xs rounded-xl shadow transition">
+          Confirm Order
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <!-- ==========================================================================
+       ORDER SUCCESS CONFIRMATION MODAL
+       ========================================================================== -->
+  <div id="order-success-modal" class="bg-white rounded-2xl max-w-sm w-full mx-auto overflow-hidden shadow-2xl relative z-50 p-6 text-center hidden">
+    
+    <div class="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-400 flex items-center justify-center mx-auto text-emerald-500 text-2xl mb-3">
+      <i class="fa-solid fa-check"></i>
+    </div>
+
+    <h3 class="font-bold text-xl text-slate-900 mb-1">Order Confirmed! 🎉</h3>
+    <p class="text-xs text-slate-500 mb-3">Thank you for shopping with Pepelli!</p>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs mb-4">
+      <div class="text-slate-500">Your Order Reference ID:</div>
+      <div class="text-base font-black text-[#008f97] mt-0.5" id="success-order-id">PEP-84920</div>
+      <div class="text-[11px] text-slate-500 mt-1">Confirmation & dispatch updates sent via SMS & WhatsApp.</div>
+    </div>
+
+    <div class="space-y-2">
+      <button onclick="closeSuccessModal(); openTrackOrderModal(); searchOrderTracking()" class="w-full py-2.5 bg-[#051d2d] text-white font-bold text-xs rounded-xl shadow hover:bg-slate-800 transition">
+        Track This Order
+      </button>
+      <button onclick="closeSuccessModal()" class="w-full py-2 bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-200 transition">
+        Continue Shopping
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="ai-stylist.js"></script>
+</body>
+</html>
